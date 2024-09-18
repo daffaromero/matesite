@@ -1,0 +1,60 @@
+syntax = "proto3";
+import "google/protobuf/timestamp.proto";
+
+option go_package = "github.com/daffaromero/matesite/server/protobuf";
+
+service IssuesService {
+  rpc CreateIssue(CreateIssueRequest) returns (CreateIssueResponse);
+  rpc GetIssue(GetIssueRequest) returns (GetIssueResponse);
+  rpc ListIssues(ListIssuesRequest) returns (ListIssuesResponse);
+  rpc UpdateIssue(UpdateIssueRequest) returns (UpdateIssueResponse);
+  rpc DeleteIssue(DeleteIssueRequest) returns (DeleteIssueResponse);
+}
+
+message CreateIssueRequest {
+  Issue issue = 1;
+}
+
+message CreateIssueResponse {
+  Issue issue = 1;
+}
+
+message GetIssueRequest {
+  string id = 1;
+}
+
+message GetIssueResponse {
+  Issue issue = 1;
+}
+
+message ListIssuesRequest {
+  string search = 1;
+}
+
+message ListIssuesResponse {
+  repeated Issue issues = 1;
+}
+
+message Issue {
+  string id = 1;
+  string title = 2;
+  string description = 3;
+  google.protobuf.Timestamp created_at = 4;
+  google.protobuf.Timestamp updated_at = 5;
+}
+
+message UpdateIssueRequest {
+  Issue issue = 1;
+}
+
+message UpdateIssueResponse {
+  Issue issue = 1;
+}
+
+message DeleteIssueRequest {
+  string id = 1;
+}
+
+message DeleteIssueResponse {
+  bool success = 1;
+}
